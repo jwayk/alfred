@@ -52,10 +52,16 @@ const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", 
 
 const mp_keys = config.points
 
-// Initialize Discord Bot
-const bot = new Discord.Client();
+// simple check for the presence of the string "beta" on the command line
+// loads up alfred under a separate bot id for testing in this case
+// works with nodemon
+runtimeArgs = process.argv.slice(2)
+prodMode = !runtimeArgs.includes("beta")
 
-bot.login(auth.token)
+// initialize discord bot
+const bot = new Discord.Client()
+
+bot.login(prodMode ? auth.tokens.prod : auth.tokens.beta)
 
 bot.on('error', console.error)
 
