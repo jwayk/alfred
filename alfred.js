@@ -21,6 +21,8 @@
 		- fetching reaction images from an internal archive (and tenor in the near future)
 		- minecraft server command passthrough
 
+	be sure to check the beta branch for the latest features :3
+
 */
 
 const react_event = {
