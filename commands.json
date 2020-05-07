@@ -78,6 +78,13 @@
     "usage": "!mc me more",
     "secret": "",
     "guild_only": "1"
+  },
+
+  "upload": {
+    "name": "Upload",
+    "description": "",
+    "secret": "1",
+    "guild_only": ""
   }
 
 }

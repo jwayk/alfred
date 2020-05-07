@@ -43,6 +43,7 @@ const fs = require('fs')
 const Discord = require('discord.js')
 const chalk = require('chalk')
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest
+const request = require('request')
 const moment = require('moment-timezone')
 const con = require('rcon-client')
 
@@ -292,7 +293,7 @@ bot.on('message', async message => {
 		
 			log(2, `${message.author.tag} | !${cmd} | ${message.guild ? `#${message.channel.name} in ${message.guild.name}` : "direct message"}`)
 
-			let type = args.shift()
+			var type = args.shift()
 			
 			if (!type) {
 				
@@ -354,6 +355,33 @@ bot.on('message', async message => {
 
 			log(3, `"${select}" to ${message.guild ? `#${message.channel.name} in ${message.guild.name}` : "direct message"}`)
 		
+			break
+
+		case 'upload':
+
+			if (!validatePerms(message, false, true)) {
+
+				deny(message, cmd, phrasebook.deny.not_permitted)
+				return
+
+			}
+
+			var upType = args.shift()
+			var dir = config.reactionsPath
+
+			if (getTypes(config.reactionsPath).includes(upType)) {
+				dir = `${config.reactionsPath}/${upType}`
+			}
+
+			files = message.attachments.array()
+			files.forEach(a => {
+				request(a.url).pipe(
+					fs.createWriteStream(`${dir}/${a.filename}`)
+				)
+			})
+
+			log(2, `${message.author.tag} | !${cmd} | ${message.guild ? `#${message.channel.name} in ${message.guild.name}` : "direct message"}`)
+
 			break
 		
 		// !ring
