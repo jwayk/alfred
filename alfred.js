@@ -1,20 +1,27 @@
-/* 	todo
+/*
 
-	- !help command detailing supported commands
-		- maybe add to !greet message?
-	- more detailed console.log() messages
-		- category (action taken)
-		- timestamp
-		- recipient
-		- guild/channel
-	- minecraft command wrapper
-	- credential verification for !hail
-	- more reaction images
-	- meme library?
+	alfred.js
+	a discord bot 
+	=========================
+	author  | jwayk
+	date    | 07/05/2020
+	version | 2.0.1
+	=========================
+
+	alfred is basically just a collection of experiments i've put together for my own discord server.
+
+	since he is more or less a personal project, a lot of the code is sort of stream-of-consciousness. 
+	i do intend to put together some proper documentation later, but for now things are a bit scattered.
+
+	as far as functionality, there are a few main tasks alfred performs
+		- greeting new users
+		- managing daily chat channels
+		- tracking reaction statistics by user
+		- managing user roles based on these stats
+		- fetching reaction images from an internal archive (and tenor in the near future)
+		- minecraft server command passthrough
 
 */
-
-// test
 
 const react_event = {
 	MESSAGE_REACTION_ADD: 'messageReactionAdd',
