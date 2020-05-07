@@ -67,13 +67,8 @@ bot.on('ready', function (evt) {
 	
 	// only runs this command in prod version
 	if (bot.user.id == "581242288907223087") {
-		
-		var interval = 1000 * 60 * 60 * 1
-		setInterval(function(){
-			dailyChatPerms();
-		}, interval);
-		
-		dailyChatPerms();
+
+		synchronizeDailyUpdates()
 		
 	}
 	
@@ -1074,7 +1069,7 @@ function dailyChatPerms(){
 	var d = moment().tz("America/New_York");
 	var n = d.day();
 
-	log(1, "Daily Chat permissions checked/updated. Day is " + days[n] + ".")
+	log(1, "Daily Chat permissions checked/updated.")
 	// console.log("Current number of categories and channels under management: " + bot.channels.size)
 
 	for (i in days) {
@@ -1102,4 +1097,24 @@ function dailyChatPerms(){
 		
 	}
 	
-};
+}
+
+function synchronizeDailyUpdates() {
+
+	var m = moment.tz("America/New_York")
+    var nextDay = m.endOf('day').add(1, "second")
+
+    var delay = moment.duration(nextDay.subtract(moment.tz("America/New_York")))
+
+    console.log(delay.asMilliseconds())
+
+    setTimeout(function() {
+        setInterval(function() {
+            dailyChatPerms()
+        }, 1000 * 60 * 60 * 24)
+        dailyChatPerms()
+    }, delay.asMilliseconds())
+
+    dailyChatPerms()
+
+}
