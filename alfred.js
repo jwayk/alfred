@@ -666,16 +666,6 @@ function getTenor(type) {
 
 }
 
-function processTenor(responseText) {
-
-	var rObjects = JSON.parse(responseText)
-
-	gifs = rObjects["results"]
-
-	return gifs
-
-}
-
 function getGifs(url) {
 
 	var xhr = new XMLHttpRequest()
