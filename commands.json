@@ -1,0 +1,83 @@
+{
+
+  "img": {
+    "name": "Image",
+    "arguments": {
+      "type": "(optional) Request an image of a specific mood or tone. For a list of types, try '!img help' or '!img types'."
+    },
+    "description": "Request an image from my personal collection.",
+    "usage": "!img delet",
+    "secret": "",
+    "guild_only": ""
+  },
+
+  "hail": {
+    "name": "Summon Users",
+    "arguments": {
+      "user_mention": "The user(s) you wish to summon to the current channel mentioned with @ notation."
+    },
+    "description": "Summon a user (or group of users) to your current channel.",
+    "usage": "!hail @jwayk#2094 @SharpSack#9056",
+    "secret": "",
+    "guild_only": "1"
+  },
+
+  "ring": {
+    "name": "Ring",
+    "description": "Summon me to your current channel. If I can hear you, I will respond.",
+    "usage": "!ring",
+    "secret": "",
+    "guild_only": ""
+  },
+
+  "gorilla": {
+    "name": "Ancient Text Reading",
+    "description": "Request a reading of the ancient texts.",
+    "usage": "!gorilla",
+    "secret": "1",
+    "guild_only": ""
+  },
+
+  "greet": {
+    "name": "Greeting",
+    "description": "Request a personal greeting from yours truly.",
+    "usage": "!greet",
+    "secret": "",
+    "guild_only": "1"
+  },
+
+  "mc": {
+    "name": "Minecraft",
+    "arguments": {
+      "command_string": "A valid, server-executable Minecraft command."
+    },
+    "description": "Work-in-progress Minecraft command wrapper.",
+    "usage": "!mc <minecraft command>",
+    "secret": "1",
+    "guild_only": "1"
+  },
+
+  "help": {
+    "name": "Help",
+    "arguments": {
+      "command": "(optional) The specific command you would like to know more about."
+    },
+    "description": "Yes, you're very clever.",
+    "usage": "!help help",
+    "secret": "1",
+    "guild_only": ""
+  },
+
+  "mp": {
+    "name": "Meme Points",
+    "arguments": {
+      "me/<@mention>": "(optional) Guild member for whom stats will be displayed.", 
+      "more": "(optional) Flag for extended statistics."
+    },
+    "description": "Displays statistics from the server's MemePoints record.",
+    "usage": "!mc me more",
+    "secret": "",
+    "guild_only": "1"
+  }
+
+}

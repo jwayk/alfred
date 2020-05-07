@@ -1,0 +1,8 @@
+
+node_modules
+
+_*
+package*.json
+*.bat
+
+ideas.txt
