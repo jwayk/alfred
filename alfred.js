@@ -52,10 +52,14 @@ const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", 
 
 const mp_keys = config.points
 
+runtimeArgs = process.argv.slice(2)
+prodMode = !runtimeArgs.includes("beta")
+console.log(prodMode)
+
 // Initialize Discord Bot
 const bot = new Discord.Client();
 
-bot.login(auth.token)
+bot.login(prodMode ? auth.tokens.prod : auth.tokens.beta)
 
 bot.on('error', console.error)
 
@@ -66,7 +70,7 @@ bot.on('ready', function (evt) {
 	// bot.user.setActivity(`Happily serving ${bot.guilds.size} servers.`)
 	
 	// only runs this command in prod version
-	if (bot.user.id == "581242288907223087") {
+	if (prodMode) {
 
 		synchronizeDailyUpdates()
 		
@@ -1105,8 +1109,6 @@ function synchronizeDailyUpdates() {
     var nextDay = m.endOf('day').add(1, "second")
 
     var delay = moment.duration(nextDay.subtract(moment.tz("America/New_York")))
-
-    console.log(delay.asMilliseconds())
 
     setTimeout(function() {
         setInterval(function() {
