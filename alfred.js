@@ -352,7 +352,7 @@ bot.on('message', async message => {
 				
 			}
 
-			log(3, `Bing Image to ${message.guild ? `#${message.channel.name} in ${message.guild.name}` : "direct message"}`)
+			log(3, `Sent a '${searchString}' image to ${message.guild ? `#${message.channel.name} in ${message.guild.name}` : "direct message"}`)
 		
 			break
 		
