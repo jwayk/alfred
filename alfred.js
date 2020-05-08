@@ -40,6 +40,7 @@ const points = require('./_points.json')
 
 // native imports
 const fs = require('fs')
+const http = require('https')
 
 // external dependencies
 const Discord = require('discord.js')
@@ -343,19 +344,13 @@ bot.on('message', async message => {
 						searchString = type
 					}
 
-					select = getTenor(searchString)
-
-					message.channel.send("", {
-						files: [
-							select
-						]
-					})
+					sendBingImage(searchString, message)
 
 				}
 				
 			}
 
-			log(3, `"${select}" to ${message.guild ? `#${message.channel.name} in ${message.guild.name}` : "direct message"}`)
+			log(3, `Sent a '${searchString}' image to ${message.guild ? `#${message.channel.name} in ${message.guild.name}` : "direct message"}`)
 		
 			break
 
@@ -688,16 +683,6 @@ function getTenor(type) {
 	// Math.floor(Math.random() * options.length)
 
 	return gifUrls[Math.floor(Math.random() * gifUrls.length)]
-
-}
-
-function processTenor(responseText) {
-
-	var rObjects = JSON.parse(responseText)
-
-	gifs = rObjects["results"]
-
-	return gifs
 
 }
 
@@ -1054,6 +1039,59 @@ async function serverMPStats(guild) {
 	ret_string += "=============================\n\n"
 
 	return ret_string
+
+}
+
+function pickBingImage(images) {
+
+	let imgUrls = []
+
+	for (let img of images) {
+
+		if (parseInt(img.contentSize) < 8388120) {
+			imgUrls.push(img.contentUrl)
+    	}
+
+	}
+
+	return imgUrls[Math.floor(Math.random() * imgUrls.length)]
+
+}
+
+function sendBingImage(type, message) {
+
+	function handler(response) {
+
+		let body = ''
+
+        response.on('data', function(d) {
+            body += d
+        })
+    
+        response.on('end', function() {
+
+			parsed = JSON.parse(body)
+			message.channel.send("", {
+				files: [
+					pickBingImage(parsed.value)
+				]
+			})
+    
+        })
+
+	}
+
+	let params = {
+        method: 'GET',
+        hostname: 'api.cognitive.microsoft.com',
+        path: `/bing/v7.0/images/search?q=${encodeURIComponent(type)}`,
+        headers: {
+            'Ocp-Apim-Subscription-Key': auth.azure_key
+        }
+    }
+
+    let req = http.request(params, handler)
+    req.end()
 
 }
 
