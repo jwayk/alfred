@@ -104,7 +104,7 @@ bot.on('message', async message => {
 	if (message.author.bot) return;
 	
 	// prod version (alfred) ignores message in playground (test server)
-	if (message.guild && (bot.user.id == "581242288907223087") && (message.guild.id == "581242846615699466")) return;
+	if (message.guild && (prodMode) && (message.guild.id == "581242846615699466")) return;
 	
 	// ignore any message that doesn't have the command prefix in front
 	if (message.content.indexOf(config.prefix) !== 0) return;
